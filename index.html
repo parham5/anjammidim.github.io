@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>استودیو محتوایی پرهام فلاح کوشکی</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="تبدیل صوت به متن، ساخت پاورپوینت، طراحی بنر، ادیت عکس، PDF به Word، کدنویسی و آنالیز پیج اینستاگرام با قیمت ثابت ۱۰۰ هزار تومان برای هر خدمت." />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #050716;
+      --card-bg: #0f172a;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.12);
+      --accent-strong: rgba(99, 102, 241, 0.35);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148, 163, 184, .35);
+      --danger: #fb7185;
+      --success: #22c55e;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 12px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, .12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129, 140, 248, .16), transparent 55%),
+                  linear-gradient(135deg, #020617, #020617);
+      border-radius: 28px;
+      padding: 22px 20px 24px;
+      border: 1px solid rgba(148, 163, 184, .35);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, .9),
+        0 0 0 1px rgba(15, 23, 42, .9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, .22), transparent 55%),
+        radial-gradient(circle at 90% 40%, rgba(236, 72, 153, .18), transparent 55%);
+      opacity: .9;
+      mix-blend-mode: screen;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      padding: 2px;
+      background: conic-gradient(from 210deg, #4f46e5, #ec4899, #22c55e, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, .8);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 0%, #334155, #020617 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: .03em;
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+    }
+
+    .brand-text h1 span {
+      color: #e5e7eb;
+      font-weight: 800;
+    }
+
+    .brand-text p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 4px 11px;
+      border: 1px solid rgba(148, 163, 184, .5);
+      font-size: 11px;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, .75);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, .25);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill {
+        margin-top: 6px;
+      }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .hero-main h2 span {
+      color: #a5b4fc;
+    }
+
+    .hero-main p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, .45);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, .8);
+    }
+
+    .hero-side {
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, .2), transparent 65%),
+                  rgba(15, 23, 42, .96);
+      padding: 12px 12px 12px;
+      border: 1px solid rgba(148, 163, 184, .6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(148, 163, 184, .18), transparent 20%, transparent 80%, rgba(94, 234, 212, .18));
+      opacity: .6;
+      pointer-events: none;
+    }
+
+    .hero-side-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    @media (max-width: 520px) {
+      .hero-side-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .price span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .guarantee {
+      font-size: 11px;
+      color: #f9a8d4;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .guarantee-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, .8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #fecaca;
+      background: rgba(127, 29, 29, .5);
+    }
+
+    .hero-cta-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .hero-cta-text b {
+      color: #e5e7eb;
+    }
+
+    .hero-actions {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 14px;
+      border: none;
+      outline: none;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      color: #f9fafb;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, .55);
+      border: 1px solid transparent;
+    }
+
+    .btn-outline {
+      background: rgba(15, 23, 42, .9);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, .8);
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, .9);
+    }
+
+    .qr-card {
+      justify-self: center;
+      text-align: center;
+    }
+
+    .qr-box {
+      border-radius: 18px;
+      padding: 10px;
+      background: rgba(15, 23, 42, .95);
+      border: 1px dashed rgba(148, 163, 184, .7);
+    }
+
+    .qr-placeholder {
+      width: 148px;
+      height: 148px;
+      border-radius: 16px;
+      background: repeating-linear-gradient(45deg, #020617 0, #020617 10px, #111827 10px, #111827 20px);
+      border: 1px solid rgba(148, 163, 184, .7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #9ca3af;
+      padding: 8px;
+    }
+
+    .qr-caption {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .username {
+      color: #a5b4fc;
+      font-weight: 600;
+    }
+
+    .sections {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .sections {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card-section {
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      background: rgba(15, 23, 42, .96);
+      border: 1px solid rgba(148, 163, 184, .6);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, .7);
+      color: var(--text-muted);
+    }
+
+    .service-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+      font-size: 12px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 5px 6px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, .9);
+      border: 1px solid rgba(30, 64, 175, .4);
+    }
+
+    .service-icon {
+      margin-top: 2px;
+      font-size: 13px;
+    }
+
+    .service-text-title {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .service-text-desc {
+      color: var(--text-muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .note b {
+      color: #e5e7eb;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-label {
+      width: 90px;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .contact-value a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(148, 163, 184, .6);
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="content">
+      <header>
+        <div class="brand">
+          <div class="avatar-ring">
+            <div class="avatar">
+              PF
+            </div>
+          </div>
+          <div class="brand-text">
+            <h1>
+              استودیو محتوایی <span>پرهام فلاح کوشکی</span>
+            </h1>
+            <p>
+              تبدیل صوت به متن، ساخت پاورپوینت، طراحی بنر و کاور، ادیت عکس، PDF به Word، کدنویسی و آنالیز پیج اینستاگرام.
+            </p>
+          </div>
+        </div>
+        <div class="pill">
+          <span class="pill-dot"></span>
+          همه خدمات فقط <b>۱۰۰ هزار تومان</b> برای هر مورد — با ویرایش تا رضایت کامل شما
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-main">
+          <h2>
+            هر کاری برای محتوای دیجیتال می‌خواهی، <span>یک نفر انجامش می‌دهد</span>
+          </h2>
+          <p>
+            اگر برای کلاس، دانشگاه، پیج اینستاگرام یا کسب‌وکارت نیاز به محتوای مرتب و حرفه‌ای داری، اینجا می‌توانی تقریباً همهٔ کارهایت را یک‌جا بسپاری: از پیاده‌سازی صوت تا طراحی پاورپوینت و بنر، ادیت عکس و تبدیل PDF به Word، تا ساخت برنامه و آنالیز پیج.
+          </p>
+          <div class="badge-row">
+            <span class="badge">قیمت ثابت برای هر خدمت: ۱۰۰٬۰۰۰ تومان</span>
+            <span class="badge">تحویل در زمان کوتاه</span>
+            <span class="badge">ویرایش رایگان تا رسیدن به نتیجهٔ دلخواه</span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="hero-side-inner">
+            <div>
+              <div class="price">
+                ۱۰۰٬۰۰۰ تومان
+                <span>برای هر خدمت (تک‌نرخی و شفاف)</span>
+              </div>
+              <div class="guarantee">
+                <span class="guarantee-icon">★</span>
+                کار تا زمانی که راضی باشی اصلاح می‌شود — بدون هزینهٔ اضافه
+              </div>
+              <p class="hero-cta-text">
+                برای ثبت سفارش، فقط کافی است در <b>تلگرام</b> یا با <b>تماس تلفنی</b> پیام بدهی و نوع کاری که می‌خواهی را بگویی (مثلاً: «تبدیل ویس یک‌ساعته به متن» یا «ساخت پاورپوینت ۱۵ اسلایدی»).
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="https://t.me/PARHAM_FALLAH_KOOSHKI" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 12.8L18.5 4.5c.3-.3.9-.1.8.3l-2.2 12.3c-.1.6-.8.8-1.2.4l-3.2-3.3-2.1 2.1c-.4.4-1.1.2-1.2-.4l-.7-4.2c0-.2.1-.4.2-.5z" fill="currentColor"/></svg>
+                  چت مستقیم در تلگرام
+                </a>
+                <a class="btn btn-outline" href="tel:+989904098068">
+                  تماس: ۰۹۹۰ ۴۰۹ ۸۰۶۸
+                </a>
+              </div>
+            </div>
+
+            <div class="qr-card">
+              <div class="qr-box">
+                <div class="qr-box">
+                  <img src="qr.png" alt="QR Code Telegram" style="width: 148px; height: 148px; border-radius: 16px;" />
+                </div>
+              </div>
+              <p class="qr-caption">
+                در تلگرام جستجو کن:
+                <span class="username">@PARHAM_FALLAH_KOOSHKI</span>
+              </p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="sections" aria-label="خدمات و راه‌های ارتباطی">
+        <section class="card-section" aria-label="لیست خدمات">
+          <div class="card-header">
+            <h3>خدماتی که برایت انجام می‌دهم</h3>
+            <div class="card-tag">هر مورد ۱۰۰٬۰۰۰ تومان</div>
+          </div>
+          <ul class="service-list">
+            <li class="service-item">
+              <span class="service-icon">🎧</span>
+              <div>
+                <div class="service-text-title">تبدیل صوت به متن</div>
+                <div class="service-text-desc">
+                  پیاده‌سازی دقیق ویس کلاس، جلسات، پادکست و فایل‌های صوتی با علائم نگارشی و پاراگراف‌بندی مرتب.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">📊</span>
+              <div>
+                <div class="service-text-title">ساخت پاورپوینت حرفه‌ای</div>
+                <div class="service-text-desc">
+                  طراحی اسلایدهای تمیز و قابل‌فهم برای ارائه‌های مدرسه، دانشگاه، پایان‌نامه و ارائه‌های کاری.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">🎨</span>
+              <div>
+                <div class="service-text-title">طراحی بنر و کاور</div>
+                <div class="service-text-desc">
+                  طراحی بنر و کاور اینستاگرام، هایلایت و پست‌ها متناسب با سبک پیج و رنگ سازمانی.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">🖼</span>
+              <div>
+                <div class="service-text-title">ادیت عکس و افزایش کیفیت</div>
+                <div class="service-text-desc">
+                  اصلاح نور، رنگ، کنتراست، حذف نویز و بهتر کردن کیفیت کلی عکس‌ها برای استفاده در شبکه‌های اجتماعی یا چاپ.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">📄</span>
+              <div>
+                <div class="service-text-title">تبدیل PDF به Word</div>
+                <div class="service-text-desc">
+                  تبدیل حرفه‌ای PDF به فایل Word قابل ویرایش، تا جای ممکن با حفظ ساختار و تیترها.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">💻</span>
+              <div>
+                <div class="service-text-title">ساخت برنامه و کدنویسی</div>
+                <div class="service-text-desc">
+                  انجام پروژه‌های سادهٔ کدنویسی و ساخت برنامه در سطح دانش‌آموزی / مقدماتی برای تمرین، ارائه یا پروژه.
+                </div>
+              </div>
+            </li>
+            <li class="service-item">
+              <span class="service-icon">📈</span>
+              <div>
+                <div class="service-text-title">آنالیز پیج اینستاگرام</div>
+                <div class="service-text-desc">
+                  بررسی پیج اینستاگرام، نقاط ضعف و قوت، پیشنهاد محتوا، زمان‌های بهتر برای پست‌گذاری و ایده برای رشد.
+                </div>
+              </div>
+            </li>
+          </ul>
+          <p class="note">
+            <b>نکته:</b> اگر چندتا از این خدمات را با هم نیاز داشته باشی (مثلاً تبدیل صوت به متن + ساخت پاورپوینت)، می‌توانیم درباره قیمت نهایی و تخفیف در تلگرام صحبت کنیم.
+          </p>
+        </section>
+
+        <section class="card-section" aria-label="راه‌های ارتباطی و توضیحات تکمیلی">
+          <div class="card-header">
+            <h3>چطور سفارش ثبت کنی؟</h3>
+            <div class="card-tag">پاسخ‌گویی دوستانه 😊</div>
+          </div>
+          <ul class="contact-list">
+            <li class="contact-row">
+              <span class="contact-label">تلگرام:</span>
+              <span class="contact-value">
+                <a href="https://t.me/PARHAM_FALLAH_KOOSHKI" target="_blank" rel="noopener noreferrer">
+                  @PARHAM_FALLAH_KOOSHKI
+                </a>
+              </span>
+            </li>
+            <li class="contact-row">
+              <span class="contact-label">شماره تماس:</span>
+              <span class="contact-value">
+                <a href="tel:+989904098068">۰۹۹۰ ۴۰۹ ۸۰۶۸</a>
+              </span>
+            </li>
+            <li class="contact-row">
+              <span class="contact-label">ایمیل (اختیاری):</span>
+              <span class="contact-value">
+                <a href="mailto:parhamfallah1392@gmail.com">parhamfallah1392@gmail.com</a>
+              </span>
+            </li>
+          </ul>
+          <p class="note">
+            لطفاً هنگام پیام دادن، مشخص کن دقیقاً چه خدمتی نیاز داری، حدود حجم کار چقدر است (مثلاً «ویس ۴۵ دقیقه‌ای» یا «پاورپوینت ۲۰ اسلایدی») و اگر ددلاین خاصی داری بگو تا بتوانم بهتر برنامه‌ریزی کنم.
+          </p>
+          <p class="note">
+            خروجی نهایی می‌تواند بسته به نوع کار، در قالب‌های مختلف (Word, PowerPoint, تصویر، PDF و ...) برایت ارسال شود.
+          </p>
+        </section>
+      </section>
+
+      <footer>
+        <span>© ۲۰۲۵ استودیو محتوایی پرهام فلاح کوشکی</span>
+        <span>طراحی و پیاده‌سازی ساده برای تست روی GitHub Pages</span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
